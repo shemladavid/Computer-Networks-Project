@@ -112,6 +112,7 @@ def handle_client(client_socket, client_address):
         try:
             method, path, version = parse_request(request_data)
 
+
         except ValueError:
             print(f"{client_address} -> 400 Bad Request")
             send_error(
