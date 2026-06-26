@@ -3,7 +3,7 @@ import threading
 
 
 HOST = "127.0.0.1"
-PORT = 8080
+PORT = 8000
 
 
 def receive_request(client_socket):
