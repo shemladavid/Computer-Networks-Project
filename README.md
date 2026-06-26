@@ -115,7 +115,7 @@ python server.py
 The server starts on:
 
 ```text
-http://127.0.0.1:8080
+http://127.0.0.1:8000
 ```
 
 ---
@@ -125,11 +125,11 @@ http://127.0.0.1:8080
 Open the following URLs in a browser:
 
 ```text
-http://127.0.0.1:8080/
-http://127.0.0.1:8080/about.html
-http://127.0.0.1:8080/css/style.css
-http://127.0.0.1:8080/images/logo.png
-http://127.0.0.1:8080/docs/info.txt
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/about.html
+http://127.0.0.1:8000/css/style.css
+http://127.0.0.1:8000/images/logo.png
+http://127.0.0.1:8000/docs/info.txt
 ```
 
 ---
@@ -139,7 +139,7 @@ http://127.0.0.1:8080/docs/info.txt
 ### 404 Not Found
 
 ```bash
-curl -v http://127.0.0.1:8080/missing.html
+curl -v http://127.0.0.1:8000/missing.html
 ```
 
 Expected response:
@@ -153,7 +153,7 @@ HTTP/1.1 404 Not Found
 ### 400 Bad Request
 
 ```bash
-printf "INVALID REQUEST\r\n\r\n" | nc 127.0.0.1 8080
+printf "INVALID REQUEST\r\n\r\n" | nc 127.0.0.1 8000
 ```
 
 Expected response:
@@ -167,7 +167,7 @@ HTTP/1.1 400 Bad Request
 ### Directory Traversal Protection
 
 ```bash
-curl -v http://127.0.0.1:8080/../../secret.txt
+curl -v http://127.0.0.1:8000/../../secret.txt
 ```
 
 Expected response:
@@ -185,13 +185,13 @@ Open two terminals and execute:
 Terminal 1:
 
 ```bash
-curl http://127.0.0.1:8080/
+curl http://127.0.0.1:8000/
 ```
 
 Terminal 2:
 
 ```bash
-curl http://127.0.0.1:8080/about.html
+curl http://127.0.0.1:8000/about.html
 ```
 
 Both requests should be processed simultaneously by different threads.
