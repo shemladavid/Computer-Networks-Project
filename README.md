@@ -58,12 +58,6 @@ The server correctly returns:
 
 ### Security
 
-The implementation prevents directory traversal attacks by rejecting requests containing:
-
-```text
-..
-```
-
 Only files inside approved directories may be accessed.
 
 ---
