@@ -93,9 +93,6 @@ The project uses only Python standard library modules:
 ```python
 socket
 threading
-os
-time
-mimetypes
 ```
 
 ---
