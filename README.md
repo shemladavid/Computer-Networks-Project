@@ -1,37 +1,80 @@
-# Multi-Threaded HTTP/1.0 Web Server
+# Multi-Threaded HTTP Web Server
+
+## Submitted By
+
+* David Shemla
+* Eliana Shemla
+* Ziv Korolker
+
+## Course Information
+
+Computer Networks – Programming Assignment
+Bar-Ilan University
+Submission Date: July 2026
+
+---
 
 ## Project Description
 
-This project implements a multi-threaded HTTP/1.0 web server using Python sockets. The server handles multiple client connections concurrently using threads and serves static files from a designated directory.
+This project implements a multi-threaded HTTP web server in Python using low-level sockets and threads.
 
-Supported features:
+The server supports:
 
-* HTTP GET requests
-* Static file serving
-* Content-Type detection
-* Content-Length header generation
-* 200 OK responses
-* 400 Bad Request responses
-* 404 Not Found responses
-* Directory traversal protection (`..`)
-* Restricted access to approved subdirectories
-* Multi-threaded client handling
+* Serving static files from a local `www` directory.
+* Handling multiple client connections concurrently using threads.
+* Returning appropriate HTTP status codes (`200`, `400`, and `404`).
+* Blocking directory traversal attacks (`../`).
+* Logging client requests and server responses.
+* Supporting multiple file types including HTML, CSS, images, and text files.
 
-## Requirements
+---
 
-* Python 3.x
+## Features
 
-No external dependencies are required. The project uses only Python standard library modules:
+### Multi-threaded Architecture
 
-* socket
-* threading
+Each client connection is handled in a separate thread, allowing multiple clients to be served simultaneously.
+
+### Static File Serving
+
+The server serves files located inside the `www` directory.
+
+Supported file types include:
+
+* `.html`
+* `.css`
+* `.png`
+* `.jpg`
+* `.jpeg`
+* `.txt`
+
+### HTTP Status Codes
+
+The server correctly returns:
+
+* `200 OK`
+* `400 Bad Request`
+* `404 Not Found`
+
+### Security
+
+The implementation prevents directory traversal attacks by rejecting requests containing:
+
+```text
+..
+```
+
+Only files inside approved directories may be accessed.
+
+---
 
 ## Project Structure
 
 ```text
-project/
+Computer-Networks-Project/
 │
 ├── server.py
+├── README.md
 │
 └── www/
     ├── index.html
@@ -44,44 +87,144 @@ project/
         └── info.txt
 ```
 
-## Running the Server
+---
 
-Open a terminal in the project directory and run:
+## Requirements
+
+* Python 3.10 or newer.
+* No external libraries are required.
+
+The project uses only Python standard library modules:
+
+```python
+socket
+threading
+os
+time
+mimetypes
+```
+
+---
+
+## How to Run
+
+Clone the repository:
+
+```bash
+git clone https://github.com/shemladavid/Computer-Networks-Project.git
+cd Computer-Networks-Project
+```
+
+Run the server:
 
 ```bash
 python server.py
 ```
 
-The server will start listening on:
+The server starts on:
 
 ```text
 http://127.0.0.1:8080
 ```
 
-## Testing
+---
 
-Example URLs:
+## Example Requests
+
+Open the following URLs in a browser:
 
 ```text
 http://127.0.0.1:8080/
-http://127.0.0.1:8080/index.html
 http://127.0.0.1:8080/about.html
 http://127.0.0.1:8080/css/style.css
+http://127.0.0.1:8080/images/logo.png
 http://127.0.0.1:8080/docs/info.txt
 ```
 
-Example curl command:
+---
+
+## Testing Error Handling
+
+### 404 Not Found
 
 ```bash
-curl -v http://127.0.0.1:8080/index.html
+curl -v http://127.0.0.1:8080/missing.html
 ```
+
+Expected response:
+
+```text
+HTTP/1.1 404 Not Found
+```
+
+---
+
+### 400 Bad Request
+
+```bash
+printf "INVALID REQUEST\r\n\r\n" | nc 127.0.0.1 8080
+```
+
+Expected response:
+
+```text
+HTTP/1.1 400 Bad Request
+```
+
+---
+
+### Directory Traversal Protection
+
+```bash
+curl -v http://127.0.0.1:8080/../../secret.txt
+```
+
+Expected response:
+
+```text
+HTTP/1.1 400 Bad Request
+```
+
+---
+
+## Demonstrating Concurrent Connections
+
+Open two terminals and execute:
+
+Terminal 1:
+
+```bash
+curl http://127.0.0.1:8080/
+```
+
+Terminal 2:
+
+```bash
+curl http://127.0.0.1:8080/about.html
+```
+
+Both requests should be processed simultaneously by different threads.
+
+---
 
 ## Demo Video
 
-Demo Video Link:
-
 https://youtu.be/PASkgvK_d5I
 
+The demonstration includes:
 
+* Starting the server.
+* Serving static files.
+* Concurrent client connections.
+* Returning 404 responses.
+* Returning 400 responses.
+* Blocking directory traversal attacks.
+* Server logging output.
 
-submit: David Shemla, Eliana Shemla and Ziv Korolker
+---
+
+## Academic Integrity
+
+This project was developed independently in accordance with the course academic integrity guidelines.
+
+No code from other students or groups was used.
