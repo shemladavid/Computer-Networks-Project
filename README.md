@@ -202,20 +202,4 @@ Both requests should be processed simultaneously by different threads.
 
 https://youtu.be/PASkgvK_d5I
 
-The demonstration includes:
-
-* Starting the server.
-* Serving static files.
-* Concurrent client connections.
-* Returning 404 responses.
-* Returning 400 responses.
-* Blocking directory traversal attacks.
-* Server logging output.
-
----
-
-## Academic Integrity
-
-This project was developed independently in accordance with the course academic integrity guidelines.
-
 No code from other students or groups was used.
