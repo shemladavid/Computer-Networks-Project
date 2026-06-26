@@ -201,5 +201,3 @@ Both requests should be processed simultaneously by different threads.
 ## Demo Video
 
 https://youtu.be/PASkgvK_d5I
-
-No code from other students or groups was used.
